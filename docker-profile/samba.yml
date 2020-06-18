@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  samba:
+    container_name: samba
+    image: dperson/samba
+    restart: always
+    stdin_open: true
+    tty: true
+    environment:
+      - TZ="Asia/Shanghai"
+      - USERID=1000
+      - GROUPID=1000
+    ports:
+      - "137:137/udp"
+      - "138:138/udp"
+      - "139:139/udp"
+      - "139:139/tcp"
+      - "445:445/tcp"
+    volumes:
+      - /mnt/md0:/mnt:rw
+    command: >
+      -u "ryu;19891023"
+      -s "shared;/mnt;yes;no;no;all"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"

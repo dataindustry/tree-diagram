@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  minidlna:
+    container_name: dlna
+    image: vladgh/minidlna
+    restart: always
+    stdin_open: true
+    tty: true
+    # You need to run the container in host mode for it to be able to receive UPnP broadcast packets.
+    # The default bridge mode will not work.
+    network_mode: 'host'
+    environment:
+      - MINIDLNA_MEDIA_DIR_1=/media/ANIME
+      - MINIDLNA_MEDIA_DIR_2=/media/DRAMA
+      - MINIDLNA_MEDIA_DIR_3=/media/MOVIE
+      - MINIDLNA_FRIENDLY_NAME=RYU-PLMS-GEN10P
+      - MINIDLNA_INOTIFY=yes
+      - MINIDLNA_NOTIFY_INTERVAL=3
+    volumes:
+      - /mnt/md0/ANIME:/media/ANIME
+      - /mnt/md0/DRAMA:/media/DRAMA
+      - /mnt/md0/MOVIE:/media/MOVIE
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
