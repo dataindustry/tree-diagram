@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  embyserver:
+    container_name: embyserver
+    image: emby/embyserver:latest
+    restart: always
+    stdin_open: true
+    tty: true
+    environment:
+      - UID=1000
+      - GID=1000
+      - GIDLIST=1000
+    devices:
+      - /dev/dri/card0
+    ports:
+      - "8096:8096"
+      - "8920:8920"
+    volumes:
+      - /mnt/md0/embyserver/config:/config
+      - /mnt/md0/ANIME:/anime
+      - /mnt/md0/DRAMA:/drama
+      - /mnt/md0/MOVIE:/movie
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"

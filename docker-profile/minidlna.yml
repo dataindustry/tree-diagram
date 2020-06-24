@@ -3,7 +3,7 @@ version: '3.8'
 services:
   minidlna:
     container_name: dlna
-    image: vladgh/minidlna
+    image: vladgh/minidlna:latest
     restart: always
     stdin_open: true
     tty: true
