@@ -10,9 +10,11 @@ services:
     environment:
       - UID=1000
       - GID=1000
-      - GIDLIST=1000
+      - GIDLIST=1000,44
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
     devices:
-      - /dev/dri/card0
+      - /dev/dri:/dev/dri
     ports:
       - "8096:8096"
       - "8920:8920"
