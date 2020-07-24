@@ -30,7 +30,7 @@ networks:
       com.docker.network.driver.mtu: 1450
     ipam:
       config:
-        - subnet: 100.0.1.0/24
+        - subnet: 172.18.1.0/24
 
   macvlan2:
     driver: macvlan
@@ -39,7 +39,7 @@ networks:
       com.docker.network.driver.mtu: 1400
     ipam:
       config:
-        - subnet: 100.0.2.0/24
+        - subnet: 172.18.2.0/24
 
   macvlan3:
     driver: macvlan
@@ -48,7 +48,7 @@ networks:
       com.docker.network.driver.mtu: 1350
     ipam:
       config:
-        - subnet: 100.0.3.0/24
+        - subnet: 172.18.3.0/24
 
   macvlan4:
     driver: macvlan
@@ -57,4 +57,4 @@ networks:
       com.docker.network.driver.mtu: 1300
     ipam:
       config:
-        - subnet: 100.0.4.0/24
+        - subnet: 172.18.4.0/24
