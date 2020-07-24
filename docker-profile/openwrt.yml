@@ -1,1 +1,60 @@
 version: "3.8"
+
+services:
+  openwrt:
+    container_name: openwrt
+    image: openwrtorg/rootfs:latest
+    restart: always
+    stdin_open: true
+    tty: true
+    ports:
+      - "81:80/tcp"
+      - "23:22/tcp"
+      - "444:443/tcp"
+    networks:
+      - docker-profile_default
+      - macvlan1
+      - macvlan2
+      - macvlan3
+      - macvlan4
+
+networks:
+
+  docker-profile_default:
+    external: true
+
+  macvlan1:
+    driver: macvlan
+    driver_opts:
+      parent: eno1
+      com.docker.network.driver.mtu: 1450
+    ipam:
+      config:
+        - subnet: 100.0.1.0/24
+
+  macvlan2:
+    driver: macvlan
+    driver_opts:
+      parent: eno2
+      com.docker.network.driver.mtu: 1400
+    ipam:
+      config:
+        - subnet: 100.0.2.0/24
+
+  macvlan3:
+    driver: macvlan
+    driver_opts:
+      parent: eno3
+      com.docker.network.driver.mtu: 1350
+    ipam:
+      config:
+        - subnet: 100.0.3.0/24
+
+  macvlan4:
+    driver: macvlan
+    driver_opts:
+      parent: eno4
+      com.docker.network.driver.mtu: 1300
+    ipam:
+      config:
+        - subnet: 100.0.4.0/24
