@@ -10,19 +10,21 @@ services:
     environment:
       - UID=1000
       - GID=1000
-      - GIDLIST=1000,44
+      - GIDLIST=1000
+      # 暴露GPU的参数设定
       - NVIDIA_DRIVER_CAPABILITIES=all
       - NVIDIA_VISIBLE_DEVICES=all
     devices:
+      # 直通GPU的DRI
       - /dev/dri:/dev/dri
     ports:
       - "8096:8096"
       - "8920:8920"
     volumes:
-      - /mnt/md0/embyserver/config:/config
-      - /mnt/md0/ANIME:/anime
-      - /mnt/md0/DRAMA:/drama
-      - /mnt/md0/MOVIE:/movie
+      - /mnt/md0/embyserver/config:/config:rw
+      - /mnt/md0/ANIME:/anime:rw
+      - /mnt/md0/DRAMA:/drama:rw
+      - /mnt/md0/MOVIE:/movie:rw
     logging:
       driver: "json-file"
       options:

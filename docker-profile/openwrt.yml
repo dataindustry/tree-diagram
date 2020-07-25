@@ -8,15 +8,23 @@ services:
     stdin_open: true
     tty: true
     ports:
-      - "81:80/tcp"
       - "23:22/tcp"
+      - "81:80/tcp"
       - "444:443/tcp"
     networks:
+      # docker默认的桥接网络
       - docker-profile_default
+      # 每个网口对应一个macvlan网络
       - macvlan1
       - macvlan2
       - macvlan3
       - macvlan4
+    volumes:
+      - /mnt/md0/openwrt:/mnt/openwrt:rw
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
 
 networks:
 
@@ -26,8 +34,9 @@ networks:
   macvlan1:
     driver: macvlan
     driver_opts:
+      # 实际物理网口
       parent: eno1
-      com.docker.network.driver.mtu: 1450
+      com.docker.network.driver.mtu: 1100
     ipam:
       config:
         - subnet: 172.18.1.0/24
@@ -36,7 +45,7 @@ networks:
     driver: macvlan
     driver_opts:
       parent: eno2
-      com.docker.network.driver.mtu: 1400
+      com.docker.network.driver.mtu: 1200
     ipam:
       config:
         - subnet: 172.18.2.0/24
@@ -45,7 +54,7 @@ networks:
     driver: macvlan
     driver_opts:
       parent: eno3
-      com.docker.network.driver.mtu: 1350
+      com.docker.network.driver.mtu: 1300
     ipam:
       config:
         - subnet: 172.18.3.0/24
@@ -54,7 +63,7 @@ networks:
     driver: macvlan
     driver_opts:
       parent: eno4
-      com.docker.network.driver.mtu: 1300
+      com.docker.network.driver.mtu: 1400
     ipam:
       config:
         - subnet: 172.18.4.0/24

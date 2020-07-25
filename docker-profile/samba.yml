@@ -19,6 +19,8 @@ services:
       - "445:445/tcp"
     volumes:
       - /mnt/md0:/mnt:rw
+    # command部分可以参考：
+    # https://github.com/dperson/samba
     command: >
       -u "ryu;19891023"
       -s "shared;/mnt;yes;no;no;all"

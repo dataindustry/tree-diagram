@@ -11,6 +11,7 @@ services:
     # The default bridge mode will not work.
     network_mode: 'host'
     environment:
+      # MINIDLNA串流的目录设定
       - MINIDLNA_MEDIA_DIR_1=/media/ANIME
       - MINIDLNA_MEDIA_DIR_2=/media/DRAMA
       - MINIDLNA_MEDIA_DIR_3=/media/MOVIE
@@ -18,9 +19,9 @@ services:
       - MINIDLNA_INOTIFY=yes
       - MINIDLNA_NOTIFY_INTERVAL=3
     volumes:
-      - /mnt/md0/ANIME:/media/ANIME
-      - /mnt/md0/DRAMA:/media/DRAMA
-      - /mnt/md0/MOVIE:/media/MOVIE
+      - /mnt/md0/ANIME:/media/ANIME:rw
+      - /mnt/md0/DRAMA:/media/DRAMA:rw
+      - /mnt/md0/MOVIE:/media/MOVIE:rw
     logging:
       driver: "json-file"
       options:
