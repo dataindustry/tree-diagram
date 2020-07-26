@@ -8,11 +8,10 @@ services:
     stdin_open: true
     tty: true
     ports:
-      - "2222:22/tcp"
+      - "24:22/tcp"
     volumes:
       - /mnt/md0/conda/root:/root:rw
       - /mnt/md0/conda/home:/home:rw
-      - /mnt/md0/conda/conda:/opt/conda:rw
     logging:
       driver: "json-file"
       options:
